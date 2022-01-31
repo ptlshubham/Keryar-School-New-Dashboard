@@ -7,6 +7,7 @@ import { AuthenticationService } from '../../core/services/auth.service';
 import { AuthfakeauthenticationService } from '../../core/services/authfake.service';
 import { environment } from '../../../environments/environment';
 import { LAYOUT_MODE } from '../../layouts/layouts.model';
+import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private authFackservice: AuthfakeauthenticationService,
+    private loginService : LoginService
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
@@ -64,30 +66,29 @@ export class LoginComponent implements OnInit {
    * Form submit
    */
   onSubmit() {
+    debugger
     this.submitted = true;
 
     // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
     } else {
-      if (environment.defaultauth === 'firebase') {
-        this.authenticationService.login(this.f.email.value, this.f.password.value).then((res: any) => {
+        let data={
+          email :this.f.email.value,
+          password:this.f.password.value
+        };
+        this.loginService.login(data ).subscribe((data: any) => {
+          debugger
+          localStorage.setItem('authenticationToken', data[0].token);
+          localStorage.setItem('UserId', data[0].id);
+          localStorage.setItem('UserName', data[0].firstname + ' ' + data[0].lastname);
+          // localStorage.setItem('role', this.selectedRole);
+          localStorage.setItem('standardid', data[0].standard);
+         
           this.router.navigate(['/']);
         })
-          .catch(error => {
-            this.error = error ? error : '';
-          });
-      } else {
-        this.authFackservice.login(this.f.email.value, this.f.password.value)
-          .pipe(first())
-          .subscribe(
-            data => {
-              this.router.navigate(['/']);
-            },
-            error => {
-              this.error = error ? error : '';
-            });
-      }
+         
+      
     }
   }
 
