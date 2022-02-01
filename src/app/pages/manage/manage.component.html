@@ -1,0 +1,380 @@
+<app-pagetitle title="Manage" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+<!------------------------------------------Header Start Here--------------------------------------------->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-self-start">
+                    <div class="col-2">
+                        <button type="button" class="btn btn-danger waves-effect waves-light"  routerLink="/dashboard">
+                            <i class="bx bx-block font-size-16 align-middle bx-left-arrow-alt"></i> Back
+                        </button>
+                    </div>
+                </div>
+                <div class="row justify-content-end">
+                    <div class="col-2">
+                        <button type="button" class="btn btn-primary waves-effect waves-light" (click)="manageStd()">
+                            <i class="bx bx-plus font-size-16 align-middle me-2"></i> Standard
+                        </button>
+                    </div>
+                    <div class="col-2">
+                        <button type="button" class="btn btn-primary waves-effect waves-light" (click)="manageSubject()">
+                            <i class="bx bx-plus font-size-16 align-middle me-2"></i> Subject
+                        </button>
+                    </div>
+                    <div class="col-2">
+                        <button type="button" class="btn btn-primary waves-effect waves-light" (click)="manageChapater()">
+                            <i class="bx bx-plus font-size-16 align-middle me-2"></i> Chapater
+                        </button>
+                    </div>
+                    <div class="col-2">
+                        <button type="button" class="btn btn-primary waves-effect waves-light" (click)="manageSyllabus()">
+                            <i class="bx bx-plus font-size-16 align-middle me-2"></i> Syllabus
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------Header End Here----------------------------------------------->
+<!------------------------------------------Standard Start Here------------------------------------------->
+<div class="card" *ngIf="openStd">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-10">
+                <h4 class="card-title">Add Standard</h4>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <form [formGroup]="validationForm" name="stdRegForm">
+            <input type="hidden" />
+            <div class="row">
+                <div class="col-xl-4 col-md-6">
+                    <div class="form-group mb-3">
+                        <label>Standard Name</label>
+                        <input type="text" formControlName="stdname" class="form-control" id="stdname"
+                            [ngClass]="{ 'is-invalid': submitted && f.stdname.errors }"
+                            placeholder="Enter Standard Name">
+                        <div *ngIf="submitted && f.stdname.errors" class="invalid-feedback">
+                            <div *ngIf="f.stdname.errors.required">Standard Name is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="row justify-content-end">
+                <div class="col-auto">
+                    <button type="submit" (click)="addStdList()" class="btn btn-primary btn-round">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="card" *ngIf="openStd">
+    <div class="card-header">
+        <h4 class="card-title">Standard List</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Standard Name</th>
+                        <th class="text-center">Subject</th>
+                        <th class=" text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of STD | paginate: { itemsPerPage: 10, currentPage: p }">
+                        <td class="text-center">{{item.index}}</td>
+                        <td class="text-center">{{ item.stdname }}</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-round" (click)="addSubjectFromTable(item.id)"><i
+                                    class="fa fa-plus"></i> Subject</button>
+
+                        </td>
+                        <td class="text-right">
+                            <a class="btn btn-warning btn-link btn-icon btn-sm edit" data-toggle="modal"
+                                data-target="#standardModal">
+                                <i class="fa far fa-eye" (click)="editStandard(item)"></i>
+                            </a>
+                            <a class="btn btn-danger btn-link btn-icon btn-sm remove"><i class="fa fa-times"
+                                    (click)="removeStandard(item.id)"></i></a>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="ml-md-auto">
+                <pagination-controls (pageChange)="p = $event" maxSize="5" autoHide="true" responsive="true">
+                </pagination-controls>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- <div class="row" *ngIf="openStd">
+
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Standard List</h4>
+            </div>
+            <div class="card-body">
+                <div class="row mb-md-2">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length" id="tickets-table_length"><label
+                                class="d-inline-flex align-items-center">Show
+                                <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
+                                    [(ngModel)]="serviceDataTable.pageSize" class="form-control form-control-sm mx-2">
+                                    <option [ngValue]="10">10</option>
+                                    <option [ngValue]="25">25</option>
+                                    <option [ngValue]="50">50</option>
+                                    <option [ngValue]="100">100</option>
+                                </select> entries</label></div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div id="tickets-table_filter" class="dataTables_filter text-md-end"><label
+                                class="d-inline-flex align-items-center">Search:
+                                <input type="text" name="searchTerm" class="form-control form-control-sm ms-2"
+                                    aria-controls="tickets-table" [(ngModel)]="serviceDataTable.searchTerm"></label></div>
+                    </div>
+                </div>
+
+                <table id="datatable" class="table table-bordered dt-responsive nowrap w-100 datatables">
+                    <thead>
+                        <tr>
+                            <th sortable="name" (sort)="onSort($event)">Name</th>
+                            <th sortable="position" (sort)="onSort($event)">Position</th>
+                            <th sortable="office" (sort)="onSort($event)">Office</th>
+                            <th sortable="age" (sort)="onSort($event)">Age</th>
+                            <th sortable="date" (sort)="onSort($event)">Start date</th>
+                            <th sortable="salary" (sort)="onSort($event)">Salary</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let table of tables$ | async;let i=index">
+                        <tr>
+                            <td>
+                                <ngb-highlight [result]="table.name" [term]="serviceDataTable.searchTerm"></ngb-highlight>
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="table.position" [term]="serviceDataTable.searchTerm">
+                                </ngb-highlight>
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="table.office" [term]="serviceDataTable.searchTerm"></ngb-highlight>
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="table.age | number" [term]="serviceDataTable.searchTerm">
+                                </ngb-highlight>
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="table.date" [term]="serviceDataTable.searchTerm"></ngb-highlight>
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="table.salary" [term]="serviceDataTable.searchTerm"></ngb-highlight>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row justify-content-md-between align-items-md-center mt-2">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                            Showing
+                            {{service.startIndex}} to
+                            {{service.endIndex}} of {{service.totalRecords}}
+                            entries
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-5">
+                        <div class="text-md-right float-md-end pagination-rounded">
+                            <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="service.page"
+                                [pageSize]="service.pageSize">
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+    </div> 
+</div>  -->
+
+<!-- <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
+    data-bs-target=".bs-example-modal-xl" (click)="extraLarge(exlargeModal)">Extra large
+    modal</button>
+  <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal"
+                        data-bs-target=".bs-example-modal-sm" (click)="removeStandard(smallDataModal)">Small modal</button> -->
+<ng-template #smallDataModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">Update Standard Name</h5>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-hidden="true"></button>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="row">
+                <label>Standard Name</label>
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <!-- <input type="text" formControlName="stdname" class="form-control" id="stdname"
+                            placeholder="Enter Standard Name" [(ngModel)]="editStd.stdname"> -->
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-primary" (click)="updateStandardList(editStd)">Update</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+<!------------------------------------------Standard End Here--------------------------------------------->
+
+<!------------------------------------------Subject Start Here-------------------------------------------->
+<div class="card" *ngIf="openSubject">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-9">
+                <h4 class="card-title">Add Subject</h4>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form class="form-horizontal" >
+            <div class="row">
+                <div class="col-md-3">
+                    <!-- <div class="btn-group" ngbDropdown>
+                        <button type="button" class="btn btn-primary">Primary</button>
+                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                            data-bs-toggle="dropdown" aria-expanded="false" ngbDropdownToggle>
+                            <i class="mdi mdi-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu" ngbDropdownMenu>
+                            <a class="dropdown-item" href="javascript:void(0);">Action</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Another action</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
+                            
+                        </div>
+                    </div> -->
+                    <div class="mb-3">
+                        <label class="form-label">Select</label>
+                        <select class="form-select">
+                            <option *ngFor="let s of STD">{{s.stdname}}</option>
+                            <!-- <option>Large select</option>
+                            <option>Small select</option> -->
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <label class="col-form-label">Enter Subjects</label>
+                    <div class="row" *ngFor="let add of addSubjects; let ind = index">
+                        <!-- <div class="col-md-3">
+                            <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                <input type="text" class="form-control" id="sname" name="sname"
+                                    placeholder=" Enter Subject Name" [(ngModel)]="add.subject" required value=""
+                                    pattern="^[a-zA-Z]+$" (focus)="focus = true" #sname="ngModel" />
+                            </div>
+                            <div *ngIf="sname.errors && (sname.dirty || sname.touched)" class="alert alert-danger">
+                                <div *ngIf="sname.errors.required">Subject Name is required</div>
+                                <div [hidden]="!sname.errors('pattern')">
+                                    Enter Only Characters.
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="col-md-3">
+                            <div class="form-group mb-3">
+                                <label>Subject Name</label>
+                                <input type="text" formControlName="sname" class="form-control" id="sname"
+                                    [ngClass]="{ 'is-invalid': submitted && f.sname.errors }"
+                                    placeholder="Enter Standard Name">
+                                <div *ngIf="submitted && f.sname.errors" class="invalid-feedback">
+                                    <div *ngIf="f.sname.errors.required">Subect Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <i class="fa fa-plus-circle" aria-hidden="true" (click)="addSubjectList()"
+                                style="font-size: 33px !important;"></i>
+                        </div>
+                        <div class="col-md-1" *ngIf="ind > 0">
+                            <i class="fa fa-times-circle" aria-hidden="true" (click)="removeSubjectList(ind)" style="
+                    font-size: 33px !important;"></i>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <!-- <div class="col-md-3">
+                    <label class="col-form-label">Select Standard</label>
+                    <div class="dropdown form-group">
+                        <button class="dropdown-toggle btn btn-primary btn-round btn-block" type="button"
+                            name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            {{ selectedStd }}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-header">Select Standard</div>
+                            <div *ngFor="let s of STD">
+                                <a class="dropdown-item" (click)="selectSTDList(s.id)"
+                                    style="color:#252422 !important">{{
+                                    s.stdname
+                                    }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <div class="col-md-8">
+                    <label class="col-form-label">Enter Subjects</label>
+                    <div class="row" *ngFor="let add of addSubjects; let ind = index">
+                        <div class="col-md-3">
+                            <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                <input type="text" class="form-control" id="sname" name="sname"
+                                    placeholder=" Enter Subject Name" [(ngModel)]="add.subject" required value=""
+                                    pattern="^[a-zA-Z]+$" (focus)="focus = true" #sname="ngModel" />
+                            </div>
+                            <div *ngIf="sname.errors && (sname.dirty || sname.touched)" class="alert alert-danger">
+                                <div *ngIf="sname.errors.required">Subject Name is required</div>
+                                <div [hidden]="!sname.errors('pattern')">
+                                    Enter Only Characters.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <i class="fa fa-plus-circle" aria-hidden="true" (click)="addSubjectList()"
+                                style="font-size: 33px !important;"></i>
+                        </div>
+                        <div class="col-md-1" *ngIf="ind > 0">
+                            <i class="fa fa-times-circle" aria-hidden="true" (click)="removeSubjectList(ind)" style="
+                    font-size: 33px !important;"></i>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+
+        </form>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="row justify-content-end">
+                <div class="col-auto">
+                    <button type="submit"  class="btn btn-primary btn-round">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

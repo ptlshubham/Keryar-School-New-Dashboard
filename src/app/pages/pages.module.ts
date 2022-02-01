@@ -25,10 +25,13 @@ import { ChartModule } from './chart/chart.module';
 import { PagesRoutingModule } from './pages-routing.module';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ManageComponent } from './manage/manage.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    ManageComponent
   ],
   imports: [
     CommonModule,
@@ -51,6 +54,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     FormModule,
     TablesModule,
     ChartModule,
+    FormsModule,
+    ReactiveFormsModule,
     LeafletModule
   ]
 })

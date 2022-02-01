@@ -204,11 +204,11 @@ export const MENU: MenuItem[] = [
             },
         ]
     },
-    {
-        id: 34,
-        label: 'MENUITEMS.MENU.TEXT',
-        isTitle: true
-    },
+    // {
+    //     id: 34,
+    //     label: 'MENUITEMS.MENU.TEXT',
+    //     isTitle: true
+    // },
     {
         id: 35,
         label: 'MENUITEMS.COMPONENTS.TEXT',
@@ -515,6 +515,12 @@ export const MENU: MenuItem[] = [
                 ]
             },
         ]
+    },
+    {
+        id: 83,
+        label: 'MENUITEMS.MANAGE.TEXT',
+        icon: 'home',
+        link: '/',
     }
 ];
 
