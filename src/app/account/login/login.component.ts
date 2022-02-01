@@ -98,6 +98,7 @@ export class LoginComponent implements OnInit {
   //   }
   // }
   onSubmit() {
+    debugger
     this.submitted = true;
     localStorage.clear();
     // credentials.role = this.selectedRole;
