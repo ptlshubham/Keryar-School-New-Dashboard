@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/api.service';
+import { ForgotPwd } from '../forgotpwd/forgotpwd.model';
 import { Loginuser } from './login.model';
 
 @Injectable({
@@ -50,27 +51,28 @@ export class LoginService {
 
         return this.httpClient.post<any>(ApiService.getUserLoginURL, data);
     }
+    UpdateLogout(data: any) {
 
-    // forgotPwd(admin: ForgotPwd): Observable<any> {
+        return this.httpClient.post(ApiService.updateLogoutDetailsURL, data);
+    }
 
-    //     return this.httpClient.post<any>(ApiService.forgetPasswordURL, admin);
-    // }
-    // getOneTimePwd(admin: ForgotPwd): Observable<any> {
+    forgotPwd(admin: any): Observable<any> {
+
+        return this.httpClient.post<any>(ApiService.forgetPasswordURL, admin);
+    }
+    getOneTimePwd(admin: ForgotPwd): Observable<any> {
+        return this.httpClient.post<any>(ApiService.getOneTimePasswordURL, admin)
+    }
+    // changePassword(admin: ForgotPwd): Observable<any> {
     //     return this.httpClient.post<any>(ApiService.getOneTimePasswordURL, admin)
     // }
-    // // changePassword(admin: ForgotPwd): Observable<any> {
-    // //     return this.httpClient.post<any>(ApiService.getOneTimePasswordURL, admin)
-    // // }
-    // updatePassword(admin: ForgotPwd): Observable<any> {
+    updatePassword(admin: ForgotPwd): Observable<any> {
 
-    //     return this.httpClient.post<any>(ApiService.updatePasswordURL, admin);
-    // }
-    // changePassword(admin) {
-    //     return this.httpClient.post<any>(ApiService.updatePasswordURL, admin);
-    // }
-    // UpdateLogout(data) {
-       
-    //     return this.httpClient.post(ApiService.updateLogoutDetailsURL, data);
-    //   }
+        return this.httpClient.post<any>(ApiService.updatePasswordURL, admin);
+    }
+    changePassword(admin: any) {
+        return this.httpClient.post<any>(ApiService.updatePasswordURL, admin);
+    }
+
 
 }

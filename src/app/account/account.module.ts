@@ -9,11 +9,14 @@ import { AuthModule } from './auth/auth.module';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { NgOtpInputModule } from 'ng-otp-input';
+import { ForgotpwdComponent } from './forgotpwd/forgotpwd.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ForgotpwdComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +24,8 @@ import { RegisterComponent } from './register/register.component';
     ReactiveFormsModule,
     FormsModule,
     AccountRoutingModule,
-    AuthModule
+    AuthModule,
+    NgOtpInputModule
   ]
 })
 export class AccountModule { }
