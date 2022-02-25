@@ -27,8 +27,8 @@ export class ManageService {
     }
     return this.httpClient.post<any>(ApiService.getStdListURL, data);
   }
-  removeStdList() {
-    return this.httpClient.get<any>(ApiService.removeStdURL);
+  removeStdList(id:any) {
+    return this.httpClient.get<any>(ApiService.removeStdURL+id);
   }
   updateStdList(admin:Std): Observable<any> {
     return this.httpClient.post<any>(ApiService.updateStandardURL, admin);
@@ -67,7 +67,7 @@ export class ManageService {
 
 
   addSubject(data:any) {
-
+debugger
     return this.httpClient.post<any>(ApiService.saveSubjectURL, data);
   }
   getSubjectList(id:any){

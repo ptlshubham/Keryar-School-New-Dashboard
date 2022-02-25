@@ -7,7 +7,7 @@ export class Std {
         public updateddate?: Date,
         public isactive?: boolean,
         public subjectList?: any[],
-        public index?: number,
+        public index: number=0,
         public color?: string,
         public student?: [],
 

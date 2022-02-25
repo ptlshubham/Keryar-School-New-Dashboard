@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { CountToModule } from 'angular-count-to';
-import { NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbNavModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SimplebarAngularModule } from 'simplebar-angular';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -27,6 +27,9 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ManageComponent } from './manage/manage.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TablesRoutingModule } from './tables/tables-routing.module';
+import { PipesModule } from '../core/pipes/pipes.module';
+import { DropzoneModule } from 'ngx-dropzone-wrapper';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ChartModule,
     FormsModule,
     ReactiveFormsModule,
-    LeafletModule
+    LeafletModule,
+    NgbPaginationModule,
+    TablesRoutingModule,
+    NgbTypeaheadModule,
+    PipesModule,
+    DropzoneModule
   ]
 })
 export class PagesModule { }

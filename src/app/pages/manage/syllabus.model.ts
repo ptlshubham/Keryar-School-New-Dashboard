@@ -13,6 +13,7 @@ export class Syllabus {
         public image?: string,
         public descripition?: string,
         public videoLength?: string,
+        public videolength?:string,
         public createddate?: Date,
         public updateddate?: Date,
         public isactive?: boolean,

@@ -13,6 +13,12 @@ export const MENU: MenuItem[] = [
         link: '/',
     },
     {
+        id: 83,
+        label: 'Manage',
+        icon: 'plus',
+        link: '/manage',
+    },
+    {
         id: 3,
         label: 'MENUITEMS.APPS.TEXT',
         icon: 'grid',
@@ -516,11 +522,6 @@ export const MENU: MenuItem[] = [
             },
         ]
     },
-    {
-        id: 83,
-        label: 'MENUITEMS.MANAGE.TEXT',
-        icon: 'home',
-        link: '/',
-    }
+    
 ];
 

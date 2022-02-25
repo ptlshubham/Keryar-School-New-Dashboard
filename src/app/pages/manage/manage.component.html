@@ -4,35 +4,39 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <div class="row align-self-start">
-                    <div class="col-2">
-                        <button type="button" class="btn btn-danger waves-effect waves-light"  routerLink="/dashboard">
+                <div class="row ">
+                    <div class="align-self-start col-sm-2 col-xs-2">
+                        <button type="button" class="btn btn-danger waves-effect waves-light" routerLink="/dashboard">
                             <i class="bx bx-block font-size-16 align-middle bx-left-arrow-alt"></i> Back
                         </button>
                     </div>
-                </div>
-                <div class="row justify-content-end">
-                    <div class="col-2">
+                    <div class="justify-content-end col-sm-2 col-xs-2"></div>
+                    <div class="justify-content-end col-sm-2 col-xs-2">
                         <button type="button" class="btn btn-primary waves-effect waves-light" (click)="manageStd()">
                             <i class="bx bx-plus font-size-16 align-middle me-2"></i> Standard
                         </button>
                     </div>
-                    <div class="col-2">
-                        <button type="button" class="btn btn-primary waves-effect waves-light" (click)="manageSubject()">
+                    <div class="justify-content-end col-sm-2 col-xs-2">
+                        <button type="button" class="btn btn-primary waves-effect waves-light"
+                            (click)="manageSubject()">
                             <i class="bx bx-plus font-size-16 align-middle me-2"></i> Subject
                         </button>
                     </div>
-                    <div class="col-2">
-                        <button type="button" class="btn btn-primary waves-effect waves-light" (click)="manageChapater()">
+                    <div class="justify-content-end col-sm-2 col-xs-2">
+                        <button type="button" class="btn btn-primary waves-effect waves-light"
+                            (click)="manageChapater()">
                             <i class="bx bx-plus font-size-16 align-middle me-2"></i> Chapater
                         </button>
                     </div>
-                    <div class="col-2">
-                        <button type="button" class="btn btn-primary waves-effect waves-light" (click)="manageSyllabus()">
+                    <div class="justify-content-end col-sm-2 col-xs-2">
+                        <button type="button" class="btn btn-primary waves-effect waves-light"
+                            (click)="manageSyllabus()">
                             <i class="bx bx-plus font-size-16 align-middle me-2"></i> Syllabus
                         </button>
                     </div>
+
                 </div>
+
             </div>
         </div>
     </div>
@@ -49,17 +53,17 @@
     </div>
     <div class="card-body">
 
-        <form [formGroup]="validationForm" name="stdRegForm">
+        <form [formGroup]="standardForm" name="stdRegForm">
             <input type="hidden" />
             <div class="row">
                 <div class="col-xl-4 col-md-6">
                     <div class="form-group mb-3">
                         <label>Standard Name</label>
-                        <input type="text" formControlName="stdname" class="form-control" id="stdname"
-                            [ngClass]="{ 'is-invalid': submitted && f.stdname.errors }"
+                        <input type="text" formControlName="stdname" class="form-control" [(ngModel)]="StdModel.stdname"
+                            id="stdname" [ngClass]="{ 'is-invalid': submitstdflag && s.stdname.errors }"
                             placeholder="Enter Standard Name">
-                        <div *ngIf="submitted && f.stdname.errors" class="invalid-feedback">
-                            <div *ngIf="f.stdname.errors.required">Standard Name is required</div>
+                        <div *ngIf="submitstdflag && s.stdname.errors" class="invalid-feedback">
+                            <div *ngIf="s.stdname.errors.required">Standard Name is required</div>
                         </div>
                     </div>
                 </div>
@@ -78,59 +82,12 @@
         </div>
     </div>
 </div>
-<!-- <div class="card" *ngIf="openStd">
-    <div class="card-header">
-        <h4 class="card-title">Standard List</h4>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-striped" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th class="text-center">#</th>
-                        <th class="text-center">Standard Name</th>
-                        <th class="text-center">Subject</th>
-                        <th class=" text-right">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of STD | paginate: { itemsPerPage: 10, currentPage: p }">
-                        <td class="text-center">{{item.index}}</td>
-                        <td class="text-center">{{ item.stdname }}</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-round" (click)="addSubjectFromTable(item.id)"><i
-                                    class="fa fa-plus"></i> Subject</button>
-
-                        </td>
-                        <td class="text-right">
-                            <a class="btn btn-warning btn-link btn-icon btn-sm edit" data-toggle="modal"
-                                data-target="#standardModal">
-                                <i class="fa far fa-eye" (click)="editStandard(item)"></i>
-                            </a>
-                            <a class="btn btn-danger btn-link btn-icon btn-sm remove"><i class="fa fa-times"
-                                    (click)="removeStandard(item.id)"></i></a>
-                        </td>
-
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="card-footer">
-        <div class="row">
-            <div class="ml-md-auto">
-                <pagination-controls (pageChange)="p = $event" maxSize="5" autoHide="true" responsive="true">
-                </pagination-controls>
-            </div>
-        </div>
-    </div>
-</div> -->
-<!-- <div class="row" *ngIf="openStd">
-
+<div class="row" *ngIf="openStd">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Standard List</h4>
+                <h4 class="card-title">Manage Standard</h4>
+                <!-- <p class="card-title-desc">Here is example of datatable.</p> -->
             </div>
             <div class="card-body">
                 <div class="row mb-md-2">
@@ -138,53 +95,59 @@
                         <div class="dataTables_length" id="tickets-table_length"><label
                                 class="d-inline-flex align-items-center">Show
                                 <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
-                                    [(ngModel)]="serviceDataTable.pageSize" class="form-control form-control-sm mx-2">
+                                    [(ngModel)]="service.pageSize" class="form-control form-control-sm mx-2">
                                     <option [ngValue]="10">10</option>
                                     <option [ngValue]="25">25</option>
                                     <option [ngValue]="50">50</option>
                                     <option [ngValue]="100">100</option>
                                 </select> entries</label></div>
                     </div>
+                    <!-- Search -->
                     <div class="col-sm-12 col-md-6">
                         <div id="tickets-table_filter" class="dataTables_filter text-md-end"><label
                                 class="d-inline-flex align-items-center">Search:
                                 <input type="text" name="searchTerm" class="form-control form-control-sm ms-2"
-                                    aria-controls="tickets-table" [(ngModel)]="serviceDataTable.searchTerm"></label></div>
+                                    aria-controls="tickets-table" [(ngModel)]="service.searchTerm"></label></div>
                     </div>
+                    <!-- End search -->
                 </div>
 
                 <table id="datatable" class="table table-bordered dt-responsive nowrap w-100 datatables">
                     <thead>
                         <tr>
-                            <th sortable="name" (sort)="onSort($event)">Name</th>
-                            <th sortable="position" (sort)="onSort($event)">Position</th>
-                            <th sortable="office" (sort)="onSort($event)">Office</th>
-                            <th sortable="age" (sort)="onSort($event)">Age</th>
-                            <th sortable="date" (sort)="onSort($event)">Start date</th>
-                            <th sortable="salary" (sort)="onSort($event)">Salary</th>
+                            <th sortable="number">#</th>
+                            <th sortable="stdname">Standard Name</th>
+                            <th>Add Subject</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let table of tables$ | async;let i=index">
+                    <tbody *ngFor="let table of STD;let i=index">
                         <tr>
                             <td>
-                                <ngb-highlight [result]="table.name" [term]="serviceDataTable.searchTerm"></ngb-highlight>
+                                <!-- <ngb-highlight [result]="table.index"></ngb-highlight> -->
+                                {{table.index}}
                             </td>
                             <td>
-                                <ngb-highlight [result]="table.position" [term]="serviceDataTable.searchTerm">
-                                </ngb-highlight>
+                                <ngb-highlight [result]="table.stdname" [term]="service.searchTerm"></ngb-highlight>
                             </td>
                             <td>
-                                <ngb-highlight [result]="table.office" [term]="serviceDataTable.searchTerm"></ngb-highlight>
+                                <button type="button" class="btn btn-primary waves-effect waves-light"
+                                    (click)="addSubjectFromTable(table.id)">
+                                    <i class="bx bx-plus font-size-16 align-middle me-2"></i> Subject
+                                </button>
                             </td>
-                            <td>
-                                <ngb-highlight [result]="table.age | number" [term]="serviceDataTable.searchTerm">
-                                </ngb-highlight>
-                            </td>
-                            <td>
-                                <ngb-highlight [result]="table.date" [term]="serviceDataTable.searchTerm"></ngb-highlight>
-                            </td>
-                            <td>
-                                <ngb-highlight [result]="table.salary" [term]="serviceDataTable.searchTerm"></ngb-highlight>
+                            <td class="table-spacing-button-end">
+                                <!-- <button type="button" class="btn btn-soft-primary waves-effect waves-light table-spacing-btn-btw ">
+                                    <i class="mdi mdi-eye font-size-16 align-middle"></i></button> -->
+                                <button type="button"
+                                    class="btn btn-soft-warning waves-effect waves-light table-spacing-btn-btw "
+                                    data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg"
+                                    (click)="editStandard(table,largeDataModal)"><i
+                                        class="mdi mdi-content-save-edit-outline font-size-16 align-middle"></i></button>
+                                <button type="button" class="btn btn-soft-danger waves-effect waves-light "
+                                    (click)="removeStandard(table.id)"><i
+                                        class="mdi mdi-trash-can-outline font-size-16 align-middle"></i></button>
+
                             </td>
                         </tr>
                     </tbody>
@@ -192,12 +155,10 @@
                 <div class="row justify-content-md-between align-items-md-center mt-2">
                     <div class="col-sm-12 col-md-5">
                         <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
-                            Showing
-                            {{service.startIndex}} to
-                            {{service.endIndex}} of {{service.totalRecords}}
-                            entries
+                            Showing {{service.startIndex}} to {{service.endIndex}} of {{service.totalRecords}} entries
                         </div>
                     </div>
+                    <!-- Pagination -->
                     <div class="col-sm-12 col-md-5">
                         <div class="text-md-right float-md-end pagination-rounded">
                             <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="service.page"
@@ -205,19 +166,15 @@
                             </ngb-pagination>
                         </div>
                     </div>
+                    <!-- End Pagination -->
                 </div>
             </div>
-          
-        </div>
-    </div> 
-</div>  -->
 
-<!-- <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
-    data-bs-target=".bs-example-modal-xl" (click)="extraLarge(exlargeModal)">Extra large
-    modal</button>
-  <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal"
-                        data-bs-target=".bs-example-modal-sm" (click)="removeStandard(smallDataModal)">Small modal</button> -->
-<ng-template #smallDataModal let-modal>
+        </div>
+    </div>
+</div>
+
+<ng-template #largeDataModal let-modal>
     <div class="modal-header">
         <h5 class="modal-title mt-0">Update Standard Name</h5>
         <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-hidden="true"></button>
@@ -226,10 +183,10 @@
         <form class="form-horizontal">
             <div class="row">
                 <label>Standard Name</label>
-                <div class="col-sm-8">
+                <div class="col-sm-4">
                     <div class="form-group">
-                        <!-- <input type="text" formControlName="stdname" class="form-control" id="stdname"
-                            placeholder="Enter Standard Name" [(ngModel)]="editStd.stdname"> -->
+                        <input type="text" formControlName="stdname" class="form-control" id="stdname"
+                            placeholder="Enter Standard Name">
                     </div>
                 </div>
             </div>
@@ -252,115 +209,46 @@
         </div>
     </div>
     <div class="card-body">
-        <form class="form-horizontal" >
+        <form [formGroup]="subjectForm">
             <div class="row">
-                <div class="col-md-3">
-                    <!-- <div class="btn-group" ngbDropdown>
-                        <button type="button" class="btn btn-primary">Primary</button>
-                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                            data-bs-toggle="dropdown" aria-expanded="false" ngbDropdownToggle>
-                            <i class="mdi mdi-chevron-down"></i>
-                        </button>
-                        <div class="dropdown-menu" ngbDropdownMenu>
-                            <a class="dropdown-item" href="javascript:void(0);">Action</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Another action</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
-                            
-                        </div>
-                    </div> -->
+                <div class="col-xl-3 col-md-3">
                     <div class="mb-3">
-                        <label class="form-label">Select</label>
-                        <select class="form-select">
-                            <option *ngFor="let s of STD">{{s.stdname}}</option>
-                            <!-- <option>Large select</option>
-                            <option>Small select</option> -->
-                        </select>
+                        <label class="form-label">Standard</label>
+                        <div ngbDropdown>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false" ngbDropdownToggle>
+                                {{ selectedStd }} <i class="mdi mdi-chevron-down"></i></button>
+                            <div class="dropdown-menu dropdownmenu-primary" ngbDropdownMenu>
+                                <a class="dropdown-item" *ngFor="let s of STD"
+                                    (click)="selectSTDList(s.id)">{{s.stdname}}</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <label class="col-form-label">Enter Subjects</label>
+                    <label class="form-label">Enter Subjects</label>
                     <div class="row" *ngFor="let add of addSubjects; let ind = index">
-                        <!-- <div class="col-md-3">
-                            <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                <input type="text" class="form-control" id="sname" name="sname"
-                                    placeholder=" Enter Subject Name" [(ngModel)]="add.subject" required value=""
-                                    pattern="^[a-zA-Z]+$" (focus)="focus = true" #sname="ngModel" />
-                            </div>
-                            <div *ngIf="sname.errors && (sname.dirty || sname.touched)" class="alert alert-danger">
-                                <div *ngIf="sname.errors.required">Subject Name is required</div>
-                                <div [hidden]="!sname.errors('pattern')">
-                                    Enter Only Characters.
-                                </div>
-                            </div>
-                        </div> -->
-                        <div class="col-md-3">
+                        <div class="col-xl-4 col-md-4">
                             <div class="form-group mb-3">
-                                <label>Subject Name</label>
                                 <input type="text" formControlName="sname" class="form-control" id="sname"
-                                    [ngClass]="{ 'is-invalid': submitted && f.sname.errors }"
+                                    [(ngModel)]="add.subject"
+                                    [ngClass]="{ 'is-invalid': submitsubflag && sub.sname.errors }"
                                     placeholder="Enter Standard Name">
-                                <div *ngIf="submitted && f.sname.errors" class="invalid-feedback">
-                                    <div *ngIf="f.sname.errors.required">Subect Name is required</div>
+                                <div *ngIf="submitsubflag && sub.sname.errors" class="invalid-feedback">
+                                    <div *ngIf="sub.sname.errors.required">Subject Name is required</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-1">
                             <i class="fa fa-plus-circle" aria-hidden="true" (click)="addSubjectList()"
-                                style="font-size: 33px !important;"></i>
+                                style="font-size: 34px !important;"></i>
                         </div>
                         <div class="col-md-1" *ngIf="ind > 0">
                             <i class="fa fa-times-circle" aria-hidden="true" (click)="removeSubjectList(ind)" style="
-                    font-size: 33px !important;"></i>
+                    font-size: 34px !important;"></i>
                         </div>
                     </div>
                 </div>
-                
-
-                <!-- <div class="col-md-3">
-                    <label class="col-form-label">Select Standard</label>
-                    <div class="dropdown form-group">
-                        <button class="dropdown-toggle btn btn-primary btn-round btn-block" type="button"
-                            name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            {{ selectedStd }}
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <div class="dropdown-header">Select Standard</div>
-                            <div *ngFor="let s of STD">
-                                <a class="dropdown-item" (click)="selectSTDList(s.id)"
-                                    style="color:#252422 !important">{{
-                                    s.stdname
-                                    }}</a>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- <div class="col-md-8">
-                    <label class="col-form-label">Enter Subjects</label>
-                    <div class="row" *ngFor="let add of addSubjects; let ind = index">
-                        <div class="col-md-3">
-                            <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                <input type="text" class="form-control" id="sname" name="sname"
-                                    placeholder=" Enter Subject Name" [(ngModel)]="add.subject" required value=""
-                                    pattern="^[a-zA-Z]+$" (focus)="focus = true" #sname="ngModel" />
-                            </div>
-                            <div *ngIf="sname.errors && (sname.dirty || sname.touched)" class="alert alert-danger">
-                                <div *ngIf="sname.errors.required">Subject Name is required</div>
-                                <div [hidden]="!sname.errors('pattern')">
-                                    Enter Only Characters.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-1">
-                            <i class="fa fa-plus-circle" aria-hidden="true" (click)="addSubjectList()"
-                                style="font-size: 33px !important;"></i>
-                        </div>
-                        <div class="col-md-1" *ngIf="ind > 0">
-                            <i class="fa fa-times-circle" aria-hidden="true" (click)="removeSubjectList(ind)" style="
-                    font-size: 33px !important;"></i>
-                        </div>
-                    </div>
-                </div> -->
             </div>
 
         </form>
@@ -369,12 +257,745 @@
         <div class="row">
             <div class="row justify-content-end">
                 <div class="col-auto">
-                    <button type="submit"  class="btn btn-primary btn-round">
+                    <button type="submit" class="btn btn-primary btn-round" (click)="saveSubject(addSubjects)">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
                     </button>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>
+<div class="row" *ngIf="openSubject">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h4 class="card-title">Manage Subject</h4>
+                    </div>
+                    <div class="col-md-2">
+                        <!-- <label class="form-label">Standard</label> -->
+                        <div ngbDropdown>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false" ngbDropdownToggle>
+                                {{ selectedStd }} <i class="mdi mdi-chevron-down"></i></button>
+                            <div class="dropdown-menu dropdownmenu-primary" ngbDropdownMenu>
+                                <a class="dropdown-item" *ngFor="let s of STD"
+                                    (click)="selectSTDList(s.id)">{{s.stdname}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- <p class="card-title-desc">Here is example of datatable.</p> -->
+            </div>
+            <div class="card-body">
+                <div class="row mb-md-2">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length" id="tickets-table_length"><label
+                                class="d-inline-flex align-items-center">Show
+                                <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
+                                    [(ngModel)]="service.pageSize" class="form-control form-control-sm mx-2">
+                                    <option [ngValue]="10">10</option>
+                                    <option [ngValue]="25">25</option>
+                                    <option [ngValue]="50">50</option>
+                                    <option [ngValue]="100">100</option>
+                                </select> entries</label></div>
+                    </div>
+                    <!-- Search -->
+                    <div class="col-sm-12 col-md-6">
+                        <div id="tickets-table_filter" class="dataTables_filter text-md-end"><label
+                                class="d-inline-flex align-items-center">Search:
+                                <input type="text" name="searchTerm" class="form-control form-control-sm ms-2"
+                                    aria-controls="tickets-table" [(ngModel)]="service.searchTerm"></label></div>
+                    </div>
+                    <!-- End search -->
+                </div>
+
+                <table id="datatable" class="table table-bordered dt-responsive nowrap w-100 datatables">
+                    <thead>
+                        <tr>
+                            <th sortable="number">#</th>
+                            <th sortable="stdname">Standard Name</th>
+                            <th sortable="stdname">Subject Name</th>
+                            <th>Add Chapter</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let item of subjects;let i=index">
+                        <tr>
+                            <td>
+                                <!-- <ngb-highlight [result]="item.index"></ngb-highlight> -->
+                                {{item.index}}
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="selectedStd" [term]="service.searchTerm"></ngb-highlight>
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="item.subject" [term]="service.searchTerm"></ngb-highlight>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary waves-effect waves-light"
+                                    (click)="addChapaterFromTable(item.id)">
+                                    <i class="bx bx-plus font-size-16 align-middle me-2"></i> Chapater
+                                </button>
+                            </td>
+                            <td class="table-spacing-button-end">
+                                <!-- <button type="button" class="btn btn-soft-primary waves-effect waves-light table-spacing-btn-btw ">
+                                    <i class="mdi mdi-eye font-size-16 align-middle"></i></button> -->
+                                <button type="button"
+                                    class="btn btn-soft-warning waves-effect waves-light table-spacing-btn-btw "
+                                    data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg"
+                                    (click)="editSubject(item,subjectUpdate)"><i
+                                        class="mdi mdi-content-save-edit-outline font-size-16 align-middle"></i></button>
+                                <button type="button" class="btn btn-soft-danger waves-effect waves-light "
+                                    (click)="removeSubject(item.id)"><i
+                                        class="mdi mdi-trash-can-outline font-size-16 align-middle"></i></button>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row justify-content-md-between align-items-md-center mt-2">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                            Showing {{service.startIndex}} to {{service.endIndex}} of {{service.totalRecords}} entries
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="col-sm-12 col-md-5">
+                        <div class="text-md-right float-md-end pagination-rounded">
+                            <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="service.page"
+                                [pageSize]="service.pageSize">
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                    <!-- End Pagination -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<ng-template #subjectUpdate let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">Update Subject Name</h5>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-hidden="true"></button>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="row">
+
+                <div class="col-sm-4">
+                    <label>Standard Name</label>
+                    <div class="form-group">
+                        <input type="text" formControlName="stdname" class="form-control" id="stdname"
+                            [(ngModel)]="selectedStd">
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <label>Subject Name</label>
+                    <div class="form-group">
+                        <!-- <input type="text" formControlName="stdname" class="form-control" id="stdname"
+                            [(ngModel)]="selectedStd"> -->
+
+                        <input type="text" formControlName="sname" class="form-control" id="sname"
+                            placeholder="Enter Standard Name">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-primary" (click)="updateStandardList(editStd)">Update</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+<!------------------------------------------Subject End Here----------------------------------------------->
+<!------------------------------------------Chapater Start Here-------------------------------------------->
+<div class="card" *ngIf="openChapater">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-9">
+                <h4 class="card-title">Add Chapater</h4>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="chapaterForm">
+            <div class="row">
+                <div class="col-xl-3 col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Standard</label>
+                        <div ngbDropdown>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false" ngbDropdownToggle>
+                                {{ selectedStd }} <i class="mdi mdi-chevron-down"></i></button>
+                            <div class="dropdown-menu dropdownmenu-primary" ngbDropdownMenu>
+                                <a class="dropdown-item" *ngFor="let s of STD"
+                                    (click)="selectSTDList(s.id)">{{s.stdname}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Subject</label>
+                        <div ngbDropdown>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false" ngbDropdownToggle>
+                                {{ selectedSub }} <i class="mdi mdi-chevron-down"></i></button>
+                            <div class="dropdown-menu dropdownmenu-primary" ngbDropdownMenu>
+                                <a class="dropdown-item" *ngFor="let s of subjects"
+                                    (click)="selectSubjectList(s.id)">{{s.subject}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Enter Chapater</label>
+                    <div class="row" *ngFor="let add of addChapt; let ind = index">
+                        <div class="col-xl-5 col-md-5">
+                            <div class="form-group mb-3">
+                                <input type="text" formControlName="chapname" class="form-control" id="chapname"
+                                    [(ngModel)]="add.chap"
+                                    [ngClass]="{ 'is-invalid': submitchpflag && chap.chapname.errors }"
+                                    placeholder="Enter Chapater Name">
+                                <div *ngIf="submitchpflag && chap.chapname.errors" class="invalid-feedback">
+                                    <div *ngIf="chap.chapname.errors.required">Chapater Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <i class="fa fa-plus-circle" aria-hidden="true" (click)="addChapList()"
+                                style="font-size: 34px !important;"></i>
+                        </div>
+                        <div class="col-md-1" *ngIf="ind > 0">
+                            <i class="fa fa-times-circle" aria-hidden="true" (click)="removeChapList(ind)" style="
+                    font-size: 34px !important;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="row justify-content-end">
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary btn-round" (click)="saveChapatersList(addChapt)">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="openChapater">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4 class="card-title">Manage Chapater</h4>
+                    </div>
+                    <div class="col-md-2">
+                        <!-- <label class="form-label">Standard</label> -->
+                        <div ngbDropdown>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false" ngbDropdownToggle>
+                                {{ selectedStd }} <i class="mdi mdi-chevron-down"></i></button>
+                            <div class="dropdown-menu dropdownmenu-primary" ngbDropdownMenu>
+                                <a class="dropdown-item" *ngFor="let s of STD"
+                                    (click)="selectSTDList(s.id)">{{s.stdname}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div ngbDropdown>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false" ngbDropdownToggle>
+                                {{ selectedSub }} <i class="mdi mdi-chevron-down"></i></button>
+                            <div class="dropdown-menu dropdownmenu-primary" ngbDropdownMenu>
+                                <a class="dropdown-item" *ngFor="let s of subjects"
+                                    (click)="selectSubjectList(s.id)">{{s.subject}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- <p class="card-title-desc">Here is example of datatable.</p> -->
+            </div>
+            <div class="card-body">
+                <div class="row mb-md-2">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length" id="tickets-table_length"><label
+                                class="d-inline-flex align-items-center">Show
+                                <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
+                                    [(ngModel)]="service.pageSize" class="form-control form-control-sm mx-2">
+                                    <option [ngValue]="10">10</option>
+                                    <option [ngValue]="25">25</option>
+                                    <option [ngValue]="50">50</option>
+                                    <option [ngValue]="100">100</option>
+                                </select> entries</label></div>
+                    </div>
+                    <!-- Search -->
+                    <div class="col-sm-12 col-md-6">
+                        <div id="tickets-table_filter" class="dataTables_filter text-md-end"><label
+                                class="d-inline-flex align-items-center">Search:
+                                <input type="text" name="searchTerm" class="form-control form-control-sm ms-2"
+                                    aria-controls="tickets-table" [(ngModel)]="service.searchTerm"></label></div>
+                    </div>
+                    <!-- End search -->
+                </div>
+
+                <table id="datatable" class="table table-bordered dt-responsive nowrap w-100 datatables">
+                    <thead>
+                        <tr>
+                            <th sortable="number">#</th>
+                            <th sortable="stdname">Standard Name</th>
+                            <th sortable="subname">Subject Name</th>
+                            <th sortable="chapname">Chapater Name</th>
+                            <th>Add Syllabus</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let item of chapater;let i=index">
+                        <tr>
+                            <td>
+                                <!-- <ngb-highlight [result]="item.index"></ngb-highlight> -->
+                                {{item.index}}
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="selectedStd" [term]="service.searchTerm"></ngb-highlight>
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="selectedSub" [term]="service.searchTerm"></ngb-highlight>
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="item.chapname" [term]="service.searchTerm"></ngb-highlight>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary waves-effect waves-light"
+                                    (click)="addSyllabusFromTable(item.id)">
+                                    <i class="bx bx-plus font-size-16 align-middle me-2"></i> Syllabus
+                                </button>
+                            </td>
+                            <td class="table-spacing-button-end">
+                                <!-- <button type="button" class="btn btn-soft-primary waves-effect waves-light table-spacing-btn-btw ">
+                                    <i class="mdi mdi-eye font-size-16 align-middle"></i></button> -->
+                                <button type="button"
+                                    class="btn btn-soft-warning waves-effect waves-light table-spacing-btn-btw "
+                                    data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg"
+                                    (click)="editChapater(item,chapaterUpdate)"><i 
+                                        class="mdi mdi-content-save-edit-outline font-size-16 align-middle"></i></button>
+                                <button type="button" class="btn btn-soft-danger waves-effect waves-light "
+                                    (click)="removeChapater(item.id)"><i
+                                        class="mdi mdi-trash-can-outline font-size-16 align-middle"></i></button>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row justify-content-md-between align-items-md-center mt-2">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                            Showing {{service.startIndex}} to {{service.endIndex}} of {{service.totalRecords}} entries
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="col-sm-12 col-md-5">
+                        <div class="text-md-right float-md-end pagination-rounded">
+                            <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="service.page"
+                                [pageSize]="service.pageSize">
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                    <!-- End Pagination -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<ng-template #chapaterUpdate let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">Update Chapater Name</h5>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-hidden="true"></button>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="row">
+
+                <div class="col-sm-4" aria-disabled="false">
+                    <label>Standard Name</label>
+                    <div class="form-group">
+                        <input type="text" formControlName="stdname" class="form-control" id="stdname"
+                            [(ngModel)]="selectedStd">
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <label>Subject Name</label>
+                    <div class="form-group">
+                        
+                        <input type="text" formControlName="sname" class="form-control" id="sname"
+                            >
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label>Update Chapater Name</label>
+                    <div class="form-group">
+                        
+                        <input type="text" formControlName="chapname" class="form-control" id="chapname"
+                            >
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-primary" (click)="updateStandardList(editStd)">Update</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+<!------------------------------------------Chapater End Here-------------------------------------------->
+
+<div class="card" *ngIf="openSyllabus">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-9">
+                <h4 class="card-title">Add Syllabus</h4>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="syllabusForm">
+            <div class="row">
+                <div class="col-xl-3 col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Standard</label>
+                        <div ngbDropdown>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false" ngbDropdownToggle>
+                                {{ selectedStd }} <i class="mdi mdi-chevron-down"></i></button>
+                            <div class="dropdown-menu dropdownmenu-primary" ngbDropdownMenu>
+                                <a class="dropdown-item" *ngFor="let s of STD"
+                                    (click)="selectSTDList(s.id)">{{s.stdname}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Subject</label>
+                        <div ngbDropdown>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false" ngbDropdownToggle>
+                                {{ selectedSub }} <i class="mdi mdi-chevron-down"></i></button>
+                            <div class="dropdown-menu dropdownmenu-primary" ngbDropdownMenu>
+                                <a class="dropdown-item" *ngFor="let s of subjects"
+                                    (click)="selectSubjectList(s.id)">{{s.subject}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Chapater</label>
+                        <div ngbDropdown>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false" ngbDropdownToggle>
+                                {{ selectedChap }} <i class="mdi mdi-chevron-down"></i></button>
+                            <div class="dropdown-menu dropdownmenu-primary" ngbDropdownMenu>
+                                <a class="dropdown-item" *ngFor="let c of chapater"
+                                    (click)="selectChapaterList(c.id)">{{c.chapname}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-3">
+                    <div class="form-group mb-3">
+                        <label>Video Title</label>
+                        <input type="text" formControlName="videoTitle" class="form-control"
+                            [(ngModel)]="syllabusModel.videoTitle" id="videoTitle"
+                            [ngClass]="{ 'is-invalid': submitsyllabusflag && syll.videoTitle.errors }"
+                            placeholder="Enter Title">
+                        <div *ngIf="submitsyllabusflag && syll.videoTitle.errors" class="invalid-feedback">
+                            <div *ngIf="syll.videoTitle.errors.required">Title is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-3">
+                    <div class="form-group mb-3">
+                        <label>Descripition</label>
+                        <input type="text" formControlName="descripition" class="form-control"
+                            [(ngModel)]="syllabusModel.descripition" id="descripition"
+                            [ngClass]="{ 'is-invalid': submitsyllabusflag && syll.descripition.errors }"
+                            placeholder="Enter Descripition">
+                        <div *ngIf="submitsyllabusflag && syll.descripition.errors" class="invalid-feedback">
+                            <div *ngIf="syll.descripition.errors.required">Descripition is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-3">
+                    <div class="form-group mb-3">
+                        <label>Video Length</label>
+                        <input type="text" formControlName="videoLength" class="form-control"
+                            [(ngModel)]="syllabusModel.videoLength" id="videoLength"
+                            [ngClass]="{ 'is-invalid': submitsyllabusflag && syll.videoLength.errors }"
+                            placeholder="Enter Video Length">
+                        <div *ngIf="submitsyllabusflag && syll.videoLength.errors" class="invalid-feedback">
+                            <div *ngIf="syll.videoLength.errors.required">Video Length is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-3">
+                    <div class="form-group mb-3">
+                        <label>Youtube Link</label>
+                        <input type="text" formControlName="link" class="form-control" [(ngModel)]="syllabusModel.link"
+                            id="link" [ngClass]="{ 'is-invalid': submitsyllabusflag && syll.link.errors }"
+                            placeholder="Paste Youtube Iframe Link">
+                        <div *ngIf="submitsyllabusflag && syll.link.errors" class="invalid-feedback">
+                            <div *ngIf="syll.link.errors.required">Link is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-3">
+                    <div class="form-group mb-3">
+                        <label>Cover Image</label>
+                        <!-- <dropzone class="dropzone"></dropzone> -->
+                        <input formControlName="image"id="image"type="file"class="form-control"
+                        [ngClass]="{ 'is-invalid': submitsyllabusflag && syll.image.errors }"
+                        (change)="onFileChange($event)">
+                        <div *ngIf="submitsyllabusflag && syll.image.errors" class="invalid-feedback">
+                            <div *ngIf="syll.image.errors.required">Cover image is require</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="row justify-content-end">
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary btn-round" (click)="addSyllabusList()">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="openSyllabus">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4 class="card-title">List Of Syllabus</h4>
+                    </div>
+                </div>
+
+
+                <!-- <p class="card-title-desc">Here is example of datatable.</p> -->
+            </div>
+            <div class="card-body">
+                <div class="row mb-md-2">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length" id="tickets-table_length"><label
+                                class="d-inline-flex align-items-center">Show
+                                <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
+                                    [(ngModel)]="service.pageSize" class="form-control form-control-sm mx-2">
+                                    <option [ngValue]="10">10</option>
+                                    <option [ngValue]="25">25</option>
+                                    <option [ngValue]="50">50</option>
+                                    <option [ngValue]="100">100</option>
+                                </select> entries</label></div>
+                    </div>
+                    <!-- Search -->
+                    <div class="col-sm-12 col-md-6">
+                        <div id="tickets-table_filter" class="dataTables_filter text-md-end"><label
+                                class="d-inline-flex align-items-center">Search:
+                                <input type="text" name="searchTerm" class="form-control form-control-sm ms-2"
+                                    aria-controls="tickets-table" [(ngModel)]="service.searchTerm"></label></div>
+                    </div>
+                    <!-- End search -->
+                </div>
+
+                <table id="datatable" class="table table-bordered dt-responsive nowrap w-100 datatables">
+                    <thead>
+                        <tr>
+                            <th sortable="number">#</th>
+                            <th sortable="name">Name</th>
+                            <th sortable="cover">Cover Page</th>
+                            <th sortable="title">Video Title</th>
+                            <th sortable="length">Video Length</th>
+                            <th sortable="createddate">Created Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let item of syllabusList;let i=index">
+                        <tr>
+                            <td>
+                                <!-- <ngb-highlight [result]="item.index"></ngb-highlight> -->
+                                {{item.index}}
+                            </td>
+                            <td>
+                                <!-- <ngb-highlight [result]="item.index"></ngb-highlight> -->
+                                Static
+                            </td>
+                            <td>
+
+                                <img class="rounded me-2" alt="200x200" width="100"
+                                    src="http://localhost:3500{{ item.image }}" data-holder-rendered="true">
+
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="item.videotitle" [term]="service.searchTerm"></ngb-highlight>
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="item.videolength" [term]="service.searchTerm"></ngb-highlight>
+                                minutes
+                            </td>
+                            <td>
+                                {{item.createddate | date}}
+                                <!-- <ngb-highlight [result]="item.createddate" [term]="service.searchTerm"></ngb-highlight> -->
+                            </td>
+
+                            <td class="table-spacing-button-end">
+                                <button type="button"
+                                    class="btn btn-soft-primary waves-effect waves-light table-spacing-btn-btw ">
+                                    <i class="mdi mdi-eye font-size-16 align-middle"
+                                        (click)="editSyllabus(item,videoModal)"></i></button>
+                                <button type="button"
+                                    class="btn btn-soft-warning waves-effect waves-light table-spacing-btn-btw "
+                                    data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg"
+                                    (click)="updateSyllabus(item,syllabusUpdate)"><i 
+                                        class="mdi mdi-content-save-edit-outline font-size-16 align-middle"></i></button>
+                                <button type="button" class="btn btn-soft-danger waves-effect waves-light "
+                                    (click)="removeSyllabusList(item.id)"><i
+                                        class="mdi mdi-trash-can-outline font-size-16 align-middle"></i></button>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row justify-content-md-between align-items-md-center mt-2">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                            Showing {{service.startIndex}} to {{service.endIndex}} of {{service.totalRecords}} entries
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="col-sm-12 col-md-5">
+                        <div class="text-md-right float-md-end pagination-rounded">
+                            <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="service.page"
+                                [pageSize]="service.pageSize">
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                    <!-- End Pagination -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<ng-template #videoModal let-modal>
+    <div class="modal-header">
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-hidden="true"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12" style="text-align: center;">
+                <iframe width="999" height="515" [src]="safeURL | safe:'resourceUrl'" title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+            <div class="col-md-12">
+                <label class="video-title">{{vTitle}}</label>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div> -->
+</ng-template>
+<ng-template #syllabusUpdate let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">Update Chapater Name</h5>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-hidden="true"></button>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="row">
+
+                <div class="col-sm-4" aria-disabled="false">
+                    <label>Standard Name</label>
+                    <div class="form-group">
+                        <input type="text" formControlName="stdname" class="form-control" id="stdname"
+                            [(ngModel)]="selectedStd">
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <label>Subject Name</label>
+                    <div class="form-group">
+                        
+                        <input type="text" formControlName="sname" class="form-control" id="sname"
+                            >
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label>Video Title</label>
+                    <div class="form-group">
+                        
+                        <input type="text" formControlName="videoTitle" class="form-control" id="videoTitle"
+                            >
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label>Descripition</label>
+                    <div class="form-group">
+                        
+                        <input type="text" formControlName="descripition" class="form-control" id="descripition"
+                            >
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label>Video Length</label>
+                    <div class="form-group">
+                        
+                        <input type="text" formControlName="videoLength" class="form-control" id="videoLength"
+                            >
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label>Youtube Link</label>
+                    <div class="form-group">
+                        
+                        <input type="text" formControlName="link" class="form-control" id="link"
+                            >
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-primary" (click)="updateStandardList(editStd)">Update</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
