@@ -1,0 +1,167 @@
+<app-pagetitle title="Registered Teachers" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+<!------------------------------------------Header Start Here--------------------------------------------->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-2">
+                        <button type="button" class="btn btn-danger waves-effect waves-light" routerLink="/">
+                            <i class="bx bx-block font-size-16 align-middle bx-left-arrow-alt"></i> Back
+                        </button>
+                    </div>
+                    <div class="col-auto offset-md-8">
+                        <button type="button" class="btn btn-primary waves-effect waves-light" (click)="addTeacher()">
+                            <i class="bx bx-plus font-size-16 align-middle me-2"></i> Add Teacher
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------Header End Here--------------------------------------------->
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-9">
+                <h4 class="card-title">Add Teachers</h4>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="teacherForm">
+            <div class="row">
+                <div class="col-xl-4 col-md-4">
+                    <div class="form-group mb-3">
+                        <label>First Name</label>
+                        <input type="text" formControlName="firstname" class="form-control"
+                            [(ngModel)]="teacherModel.firstname" id="firstname"
+                            [ngClass]="{ 'is-invalid': submitteacherflag && teach.firstname.errors }"
+                            placeholder="Enter First Name">
+                        <div *ngIf="submitteacherflag && teach.firstname.errors" class="invalid-feedback">
+                            <div *ngIf="teach.firstname.errors.required">First Name is required!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4">
+                    <div class="form-group mb-3">
+                        <label>Last Name</label>
+                        <input type="text" formControlName="lastname" class="form-control"
+                            [(ngModel)]="teacherModel.lastname" id="lastname"
+                            [ngClass]="{ 'is-invalid': submitteacherflag && teach.lastname.errors }"
+                            placeholder="Enter Last Name">
+                        <div *ngIf="submitteacherflag && teach.lastname.errors" class="invalid-feedback">
+                            <div *ngIf="teach.lastname.errors.required">Last Name is required!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4">
+                    <div class="form-group mb-3">
+                        <label>Qualification</label>
+                        <input type="text" formControlName="qualification" class="form-control"
+                            [(ngModel)]="teacherModel.qualification" id="qualification"
+                            [ngClass]="{ 'is-invalid': submitteacherflag && teach.qualification.errors }"
+                            placeholder="Enter Qualification">
+                        <div *ngIf="submitteacherflag && teach.qualification.errors" class="invalid-feedback">
+                            <div *ngIf="teach.qualification.errors.required">Qualification is required!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4">
+                    <div class="form-group mb-3">
+                        <label>Contact Number</label>
+                        <input type="number" formControlName="contact" class="form-control"
+                            [(ngModel)]="teacherModel.contact" id="contact"
+                            [ngClass]="{ 'is-invalid': submitteacherflag && teach.contact.errors }"
+                            placeholder="Enter Contact Number">
+                        <div *ngIf="submitteacherflag && teach.contact.errors" class="invalid-feedback">
+                            <div *ngIf="teach.contact.errors.required">Contact is required!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4">
+                    <div class="form-group mb-3">
+                        <label>WhatsApp Number</label>
+                        <input type="number" formControlName="whatsapp" class="form-control"
+                            [(ngModel)]="teacherModel.whatsapp" id="whatsapp"
+                            [ngClass]="{ 'is-invalid': submitteacherflag && teach.whatsapp.errors }"
+                            placeholder="Enter WhatsAapp Number">
+                        <div *ngIf="submitteacherflag && teach.whatsapp.errors" class="invalid-feedback">
+                            <div *ngIf="teach.whatsapp.errors.required">WhatsApp is required!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4">
+                    <div class="form-group mb-3">
+                        <label>Address</label>
+                        <textarea id="address" class="form-control" rows="3" [(ngModel)]="teacherModel.address"
+                            id="address" [ngClass]="{ 'is-invalid': submitteacherflag && teach.address.errors }"
+                            placeholder="Enter Address"></textarea>
+                        <div *ngIf="submitteacherflag && teach.address.errors" class="invalid-feedback">
+                            <div *ngIf="teach.address.errors.required">Address is required!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4">
+                    <label>Select Gender</label>
+                    <div class="form-group mb-3">
+                        <div class="btn-group" role="group">
+                            <input type="radio" #genm class="btn-check" name="gender" value="male" ngModel
+                                [(ngModel)]="teacherModel.gender" autocomplete="off">
+                            <label class="btn btn-secondary" for="btnradio1">Male</label>
+                            &nbsp;
+
+                            <input type="radio" class="btn-check" #genf name="gender" value="female" ngModel
+                                [(ngModel)]="teacherModel.gender" autocomplete="off">
+                            <label class="btn btn-secondary" for="btnradio2">Female</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4">
+                    <div class="form-group mb-3">
+                        <label>Email</label>
+                        <input type="email" formControlName="email"
+                        [ngClass]="{ 'is-invalid': submitteacherflag && teach.email.errors }" class="form-control"
+                            id="email" placeholder="Enter Email">
+                        <div *ngIf="submitteacherflag && teach.email.errors" class="invalid-feedback">
+                            <div *ngIf="teach.email.errors.required">Email is required</div>
+                            <div *ngIf="teach.email.errors.email">Email must be a valid email address</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4">
+                    <div class="form-group mb-3">
+                        <label>Password </label>
+                        <input type="password" formControlName="password"
+                            [ngClass]="{ 'is-invalid': submitteacherflag && teach.password.errors }"
+                            class="form-control" [(ngModel)]="teacherModel.password" id="password"
+                            placeholder="Enter Password">
+                        <div *ngIf="submitteacherflag && teach.password.errors" class="invalid-feedback">
+                            <div *ngIf="teach.password.errors.required">Password is required!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="form-group mb-3">
+                        <label>Standard List </label>
+                        <ng-select [items]="selectValue" [multiple]="true" placeholder="Selcet Standard"></ng-select>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="row justify-content-end">
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary btn-round" (click)="saveTeacherDetail()">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

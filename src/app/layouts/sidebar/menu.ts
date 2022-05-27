@@ -19,6 +19,25 @@ export const MENU: MenuItem[] = [
         link: '/manage',
     },
     {
+        id: 86,
+        label: 'Registration',
+        icon: 'users',
+        subItems: [
+            {
+                id: 87,
+                label: 'Student Register',
+                link: '/registration/student',
+                parentId: 84
+            },
+            {
+                id: 5,
+                label: 'Teacher Register',
+                link: '/registration/teacher',
+                parentId: 84
+            },
+        ]
+    },
+    {
         id: 3,
         label: 'MENUITEMS.APPS.TEXT',
         icon: 'grid',

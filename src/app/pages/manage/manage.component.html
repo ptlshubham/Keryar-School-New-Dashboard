@@ -6,7 +6,7 @@
             <div class="card-header">
                 <div class="row ">
                     <div class="align-self-start col-sm-2 col-xs-2">
-                        <button type="button" class="btn btn-danger waves-effect waves-light" routerLink="/dashboard">
+                        <button type="button" class="btn btn-danger waves-effect waves-light" routerLink="/">
                             <i class="bx bx-block font-size-16 align-middle bx-left-arrow-alt"></i> Back
                         </button>
                     </div>
@@ -594,7 +594,7 @@
                                 <button type="button"
                                     class="btn btn-soft-warning waves-effect waves-light table-spacing-btn-btw "
                                     data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg"
-                                    (click)="editChapater(item,chapaterUpdate)"><i 
+                                    (click)="editChapater(item,chapaterUpdate)"><i
                                         class="mdi mdi-content-save-edit-outline font-size-16 align-middle"></i></button>
                                 <button type="button" class="btn btn-soft-danger waves-effect waves-light "
                                     (click)="removeChapater(item.id)"><i
@@ -645,17 +645,15 @@
                 <div class="col-sm-4">
                     <label>Subject Name</label>
                     <div class="form-group">
-                        
-                        <input type="text" formControlName="sname" class="form-control" id="sname"
-                            >
+
+                        <input type="text" formControlName="sname" class="form-control" id="sname">
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <label>Update Chapater Name</label>
                     <div class="form-group">
-                        
-                        <input type="text" formControlName="chapname" class="form-control" id="chapname"
-                            >
+
+                        <input type="text" formControlName="chapname" class="form-control" id="chapname">
                     </div>
                 </div>
             </div>
@@ -772,9 +770,9 @@
                     <div class="form-group mb-3">
                         <label>Cover Image</label>
                         <!-- <dropzone class="dropzone"></dropzone> -->
-                        <input formControlName="image"id="image"type="file"class="form-control"
-                        [ngClass]="{ 'is-invalid': submitsyllabusflag && syll.image.errors }"
-                        (change)="onFileChange($event)">
+                        <input formControlName="image" id="image" type="file" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitsyllabusflag && syll.image.errors }"
+                            (change)="onFileChange($event)">
                         <div *ngIf="submitsyllabusflag && syll.image.errors" class="invalid-feedback">
                             <div *ngIf="syll.image.errors.required">Cover image is require</div>
                         </div>
@@ -882,7 +880,7 @@
                                 <button type="button"
                                     class="btn btn-soft-warning waves-effect waves-light table-spacing-btn-btw "
                                     data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg"
-                                    (click)="updateSyllabus(item,syllabusUpdate)"><i 
+                                    (click)="updateSyllabus(item,syllabusUpdate)"><i
                                         class="mdi mdi-content-save-edit-outline font-size-16 align-middle"></i></button>
                                 <button type="button" class="btn btn-soft-danger waves-effect waves-light "
                                     (click)="removeSyllabusList(item.id)"><i
@@ -915,12 +913,16 @@
 </div>
 <ng-template #videoModal let-modal>
     <div class="modal-header">
-        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-hidden="true"></button>
+        <h5 class="modal-title mt-0">Syllabus Uploaded Video</h5>
+        <button type="button" style="margin-right: 10px;" class="btn-close" (click)="modal.dismiss('Cross click')"
+            aria-hidden="true"></button>
+
+        <!-- <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-hidden="true"></button> -->
     </div>
     <div class="modal-body">
         <div class="row">
             <div class="col-md-12" style="text-align: center;">
-                <iframe width="999" height="515" [src]="safeURL | safe:'resourceUrl'" title="YouTube video player"
+                <iframe width="800 " height="415" [src]="safeURL | safe:'resourceUrl'" title="YouTube video player"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
@@ -929,6 +931,12 @@
                 <label class="video-title">{{vTitle}}</label>
             </div>
         </div>
+    </div>
+    <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-light"
+            (click)="modal.close('Close click')">Close</button> -->
+        <button type="button" class="btn btn-danger" style="margin-right: 10px;" (click)="modal.close('Close click')"><i
+                class="bx bx-block font-size-16 align-middle dripicons-cross"></i> Close</button>
     </div>
     <!-- <div class="modal-footer justify-content-center">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
@@ -954,41 +962,36 @@
                 <div class="col-sm-4">
                     <label>Subject Name</label>
                     <div class="form-group">
-                        
-                        <input type="text" formControlName="sname" class="form-control" id="sname"
-                            >
+
+                        <input type="text" formControlName="sname" class="form-control" id="sname">
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <label>Video Title</label>
                     <div class="form-group">
-                        
-                        <input type="text" formControlName="videoTitle" class="form-control" id="videoTitle"
-                            >
+
+                        <input type="text" formControlName="videoTitle" class="form-control" id="videoTitle">
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <label>Descripition</label>
                     <div class="form-group">
-                        
-                        <input type="text" formControlName="descripition" class="form-control" id="descripition"
-                            >
+
+                        <input type="text" formControlName="descripition" class="form-control" id="descripition">
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <label>Video Length</label>
                     <div class="form-group">
-                        
-                        <input type="text" formControlName="videoLength" class="form-control" id="videoLength"
-                            >
+
+                        <input type="text" formControlName="videoLength" class="form-control" id="videoLength">
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <label>Youtube Link</label>
                     <div class="form-group">
-                        
-                        <input type="text" formControlName="link" class="form-control" id="link"
-                            >
+
+                        <input type="text" formControlName="link" class="form-control" id="link">
                     </div>
                 </div>
             </div>

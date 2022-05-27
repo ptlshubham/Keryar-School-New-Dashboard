@@ -17,6 +17,9 @@ const routes: Routes = [
     path: 'apps', loadChildren: () => import('./apps/apps.module').then(m => m.AppsModule)
   },
   {
+    path: 'registration', loadChildren: () => import('./registration/registration.module').then(m => m.RegistrationModule)
+  },
+  {
     path: 'pages', loadChildren: () => import('./extraspages/extraspages.module').then(m => m.ExtraspagesModule)
   },
   {
